@@ -1,70 +1,58 @@
-//! # CIO - Console I/O for Rust
-//!
-//! CIO provides two procedural macros (`printf!` and `input!`) that improve
-//! console input/output operations in Rust, bringing Python's convenience
-//! to Rust's safely typed environment.
-//!
-//! ## Features
-//!
-//! ### `printf!`
-//!
-//! An enhanced formatted display macro that allows for better visualization
-//! of complex data structures such as multidimensional arrays.
-//!
-//! ```
-//! use cio::printf;
-//!
-//! let arr = vec![vec![1, 2], vec![3, 4]];
-//! printf!("Array: {arr:a}");
-//! ```
-//!
-//! ### `input!`
-//!
-//! A user input macro with built-in type validation.
-//!
-//! ```
-//! use cio::input;
-//!
-//! let number: i32 = input!("Enter a number: ");
-//! ```
-
-mod printf;
-mod input;
-
+// lib.rs
 use proc_macro::TokenStream;
 
-/// Procedural macro that implements formatted output similar to C's printf
-/// but with enhanced features for Rust.
+/// CIO - Console Input/Output library for Rust
 ///
-/// # Format
-/// - `{expr}` : Displays the value of the expression
-/// - `{expr:spec}` : Displays the value with a format specifier
+/// This library provides two powerful procedural macros that enhance
+/// console I/O operations in Rust:
 ///
-/// # Specifiers
-/// - `a` : Format for arrays (with special formatting)
-/// - `c` : Simple debug format
-/// - `j` : Pretty debug format
-/// - Other specifiers conforming to `std::fmt`
+/// # Macros
 ///
-/// # Example
+/// ## println!
+/// An enhanced version of the standard println! macro that adds:
+/// - ANSI color and text styling with @() syntax
+/// - Special formatting for data structures and collections
+/// - Separator control with $() syntax
+/// - Rich expression evaluation in format strings
 ///
-/// printf!("Value: {x}, Array: {arr:a}");
+/// ## input!
+/// A macro for handling user input with built-in validation and type conversion:
+/// - Automatic parsing to the target type
+/// - Error handling and re-prompting on invalid input
+/// - Support for multiple types (numbers, strings, booleans, chars)
+/// - Colored error messages
 ///
+/// # Examples
+///
+/// ```rust
+/// use cio::{println, input};
+///
+/// // Basic colored output
+/// println!("@(green, bold)Hello@() @(blue){name}@()!");
+///
+/// // With data structures
+/// println!("Array: {array:a}");  // Pretty-printed array
+/// println!("Matrix: \n{matrix:m}");  // Matrix formatting
+///
+/// // Input with validation
+/// let name: String = input!("Your name: ");
+/// let age: i32 = input!("Your age: ");
+/// let proceed: bool = input!("Continue? (y/n): ");
+/// ```
+
+// Internal modules
+mod colorstyle;  // ANSI color and style handling
+mod extensions;  // Helper functions for container formatting
+mod formatext;   // Format string processing
+mod println;     // println! macro implementation
+mod input;       // input! macro implementation
+
+// Export macros
 #[proc_macro]
-pub fn printf(input: TokenStream) -> TokenStream {
-    printf::printf_impl(input)
+pub fn println(input: TokenStream) -> TokenStream {
+    println::println_impl(input)
 }
 
-/// Procedural macro that facilitates user input and validation.
-///
-/// This macro displays a message and then waits for valid user input.
-/// If the input is empty or cannot be parsed according to the expected return type,
-/// it displays an error and asks for input again.
-///
-/// # Example
-///
-/// let number: i32 = input!("Enter a number: ");
-///
 #[proc_macro]
 pub fn input(input: TokenStream) -> TokenStream {
     input::input_impl(input)

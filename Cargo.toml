@@ -1,9 +1,9 @@
 [package]
 name = "cio"
-version = "0.2.0"
-edition = "2021"
+version = "0.3.0"
+edition = "2024"
 description = """
-CIO provides two powerful procedural macros (`printf!` and `input!`)
+CIO provides two powerful procedural macros (`println!` and `input!`)
 that enhance console I/O operations in Rust, bringing Python-like
 convenience to Rust's type-safe environment.
 """
