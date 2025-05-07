@@ -8,7 +8,7 @@ Add this to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-cio = "0.3.0"
+cio = "0.4.0"
 ```
 
 ## Features Overview
