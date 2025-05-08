@@ -1,5 +1,5 @@
 // mains.rs
-use cio::{println, input};
+use pyrust::{println, input};
 use std::collections::{HashMap, BTreeMap, HashSet, BTreeSet, VecDeque, LinkedList, BinaryHeap};
 
 fn main() {
@@ -38,7 +38,11 @@ fn main() {
         "special character"
     };
     println!("Letter category: @(bright_green){letter_category}");
-    let letter_position = favorite_letter.to_uppercase().to_string().chars().next().unwrap() as u8 - 64;
+    let letter_position = if favorite_letter.is_ascii_alphabetic() {
+        favorite_letter.to_uppercase().to_string().chars().next().unwrap() as u8 - 64
+    } else {
+        favorite_letter as u8
+    };
     println!("Letter analysis: @(bright_cyan){letter_position}@() (position in alphabet if letter)");
 
     println!("\n@(bright_white, bold)------------------------------------------------\n");
