@@ -1,0 +1,29 @@
+[package]
+name = "cio"
+version = "0.5.0"
+authors = ["GerardDubard <infodgjl@gmail.com>"]
+edition = "2024"
+description = """
+CIO provides two powerful procedural macros (`println!` and `input!`)
+that enhance console I/O operations in Rust, bringing Python-like
+convenience to Rust's type-safe environment.
+"""
+license = "MIT"
+repository = "https://github.com/gerarddubard/cio"
+homepage = "https://github.com/gerarddubard/cio"
+documentation = "https://docs.rs/cio"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+syn = { version = "2.0.101", features = ["full"] }
+quote = "1.0.40"
+regex = "1.11.1"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
