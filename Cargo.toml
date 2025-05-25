@@ -1,6 +1,6 @@
 [package]
 name = "cio"
-version = "0.5.0"
+version = "0.5.1"
 authors = ["GerardDubard <infodgjl@gmail.com>"]
 edition = "2024"
 description = """
