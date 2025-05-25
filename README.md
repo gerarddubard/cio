@@ -23,7 +23,8 @@
 ```toml
 [dependencies]
 cio = "0.5.0"
-serde_json = "1.0"  # Required for JSON formatting
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 ```
 
 ### Basic Usage
