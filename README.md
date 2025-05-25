@@ -22,7 +22,7 @@
 
 ```toml
 [dependencies]
-cio = "0.5.0"
+cio = "0.5.1"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 ```
